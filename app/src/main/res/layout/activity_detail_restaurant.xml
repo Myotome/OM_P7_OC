@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.detailed.DetailRestaurantActivity">
+
+    <ImageView
+        android:id="@+id/iv_detail_restaurant"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/backgrounds/scenic"
+        android:contentDescription="@string/iv_description_restaurant" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/rl_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/dark_orange"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_detail_restaurant">
+
+        <TextView
+            android:id="@+id/tv_detail_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="@tools:sample/cities"
+            android:textSize="20sp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tv_detail_address"/>
+        <TextView
+            android:id="@+id/tv_detail_address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:text="123 Heaven street"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginEnd="20dp"
+            android:textColor="@color/white"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintTop_toBottomOf="@id/tv_detail_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tv_detail_hour"/>
+
+        <RatingBar
+            android:id="@+id/rb_detail"
+            android:layout_width="50dp"
+            android:layout_height="20dp"
+            android:isIndicator="true"
+            android:numStars="3"
+            android:rating="0"
+            android:stepSize="0.5"
+            android:layout_marginStart="15dp"
+            style="?android:attr/ratingBarStyleSmall"
+            app:layout_constraintStart_toEndOf="@id/tv_detail_name"
+            app:layout_constraintBottom_toBottomOf="@id/tv_detail_name"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_detail_hour"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:textColor="@color/white"
+            tools:text="8:00-12:00"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_detail_address"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/bt_detail_call"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableTop="@drawable/ic_baseline_call_24"
+        android:text="@string/call"
+        android:textColor="@color/dark_orange"
+        app:backgroundTint="#00FFFFFF"
+        app:layout_constraintTop_toBottomOf="@id/rl_detail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/bt_detail_like"/>
+
+    <Button
+        android:id="@+id/bt_detail_like"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableTop="@drawable/ic_baseline_star_24"
+        android:text="@string/like"
+        android:textColor="@color/dark_orange"
+        app:backgroundTint="#00FFFFFF"
+        app:layout_constraintTop_toBottomOf="@id/rl_detail"
+        app:layout_constraintStart_toEndOf="@id/bt_detail_call"
+        app:layout_constraintEnd_toStartOf="@id/bt_detail_website"/>
+
+    <Button
+        android:id="@+id/bt_detail_website"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableTop="@drawable/ic_baseline_language_24"
+        android:text="@string/website"
+        android:textColor="@color/dark_orange"
+        app:backgroundTint="#00FFFFFF"
+        app:layout_constraintTop_toBottomOf="@id/rl_detail"
+        app:layout_constraintStart_toEndOf="@id/bt_detail_like"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_detail_workmate"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bt_detail_like"
+        tools:listitem="@layout/frame_workmates" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="220dp"
+        android:layout_marginEnd="24dp"
+        app:srcCompat="@drawable/ic_baseline_check_circle_24"
+        app:backgroundTint="@color/white"
+        app:tint="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/checked_or_not"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

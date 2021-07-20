@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/transparent_dark_orange"
+    android:layout_marginTop="50dp"
+    android:layout_marginBottom="60dp">
+
+    <TextView
+        android:id="@+id/tv_settings_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/settings"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_settings_notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/notification"
+        android:textSize="20sp"
+        android:layout_margin="15dp"
+        app:layout_constraintTop_toTopOf="@id/sw_settings_notification"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/sw_settings_notification"
+        app:layout_constraintBottom_toBottomOf="@id/sw_settings_notification"/>
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/sw_settings_notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:checked="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_settings_head"
+        app:layout_constraintStart_toEndOf="@id/tv_settings_notification"/>
+
+    <TextView
+        android:id="@+id/tv_settings_radius"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/radius"
+        android:textSize="20sp"
+        android:layout_margin="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sw_settings_notification"/>
+
+    <SeekBar
+        android:id="@+id/sb_settings_radius"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:indeterminate="false"
+        android:max="1000"
+        app:layout_constraintTop_toBottomOf="@id/tv_settings_radius"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_settings_zoom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/zoom"
+        android:textSize="20sp"
+        android:layout_margin="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sb_settings_radius"/>
+
+    <SeekBar
+        android:id="@+id/sb_settings_zoom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:indeterminate="false"
+        android:max="20"
+        app:layout_constraintTop_toBottomOf="@id/tv_settings_zoom"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_settings_map_choice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/map_choice"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sb_settings_zoom"
+        android:layout_margin="30sp"/>
+
+    <RadioGroup
+        android:id="@+id/radiogroup_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_settings_map_choice"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:gravity="center">
+
+        <RadioButton
+            android:id="@+id/rb_settings_default"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:checked="true"
+            android:background="@drawable/default_map_selector"
+            android:button="@null"
+            android:padding="10dp"
+            android:layout_margin="15dp"/>
+
+        <RadioButton
+            android:id="@+id/rb_settings_ancient"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:checked="false"
+            android:background="@drawable/retro_map_selector"
+            android:button="@null"
+            android:layout_margin="15dp"/>
+
+        <RadioButton
+            android:id="@+id/rb_settings_night"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:checked="false"
+            android:background="@drawable/night_map_selector"
+            android:button="@null"
+            android:layout_margin="15dp"/>
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/bt_settings_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
+        android:textColor="@color/black"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/radiogroup_settings"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
