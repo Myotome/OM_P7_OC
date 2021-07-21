@@ -62,4 +62,8 @@ public class MainViewModel extends AndroidViewModel {
         mFirebaseRepository.setNullUser();
     }
 
+    public void setAutocompleteNull(){
+     mMainRepository.setAutocompleteNull();
+    }
+
 }

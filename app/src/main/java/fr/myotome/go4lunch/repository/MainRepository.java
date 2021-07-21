@@ -190,6 +190,10 @@ public class MainRepository {
                 });
     }
 
+    public void setAutocompleteNull() {
+        queryAutocompleteLiveData.setValue(null);
+    }
+
     public LiveData<AutocompletePojo> getAutocompleteQuery() {
         return queryAutocompleteLiveData;
     }

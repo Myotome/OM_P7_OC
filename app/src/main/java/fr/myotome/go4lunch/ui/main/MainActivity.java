@@ -110,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
                 if(newText.length()>2) {
                     mViewModel.setAutocompleteQuery(newText);
                 }else{
+                    mViewModel.setAutocompleteNull();
                     mViewModel.setQuery();
                 }
                 return false;
@@ -117,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         searchView.setOnCloseListener(() -> {
+            mViewModel.setAutocompleteNull();
             mViewModel.setQuery();
             return false;
         });
