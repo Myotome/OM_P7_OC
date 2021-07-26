@@ -15,6 +15,7 @@ public class User implements Serializable {
     //Empty constructor needed for fireStore
     public User(){}
 
+    // TODO MYOTOME très confusant le constructeur avec uniquement 4 des 6 champs persistés sur Firestore :p
     public User(String uid, String firstName, String mail, @Nullable String urlPicture) {
         mUid = uid;
         mFirstName = firstName;

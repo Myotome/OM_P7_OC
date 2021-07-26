@@ -25,10 +25,14 @@ import fr.myotome.go4lunch.model.nearbySearchPOJO.Result;
 import fr.myotome.go4lunch.repository.FirebaseRepository;
 import fr.myotome.go4lunch.repository.MainRepository;
 
+// TODO MYOTOME pas testé
+// TODO MYOTOME pas besoin d'étendre de AndroidViewModel, ViewModel suffit
 public class ListViewModel extends AndroidViewModel {
 
     private final MediatorLiveData<ListViewState> mMediatorLiveData = new MediatorLiveData<>();
     private final Application mApplication;
+    // TODO MYOTOME same same 1 ligne / variable
+    // TODO MYOTOME en fait non faut même les supprimer ces variables, une méthode doit renvoyer l'objet complet plutôt que de remplir ces fields
     String mName = "", mAddress = "", mDistance = "", mWorkmates = "0", mPicture = "", mPlaceId = "";
     CharSequence mOpening = "";
     float mRating = 0;
@@ -69,6 +73,7 @@ public class ListViewModel extends AndroidViewModel {
 
     }
 
+    // TODO MYOTOME same same naming
     public LiveData<ListViewState> getMediatorLiveData() {
         return mMediatorLiveData;
     }
@@ -126,6 +131,7 @@ public class ListViewModel extends AndroidViewModel {
      */
     private boolean controlFilterByPrediction(Result result, AutocompletePojo autocompletePojo){
         boolean contains = false;
+        // TODO MYOTOME pas besoin du size() != 0
         if(autocompletePojo != null && autocompletePojo.getPredictions().size()!=0){
             for (Prediction prediction : autocompletePojo.getPredictions()){
                 if (prediction.getPlaceId().equals(result.getPlaceId())) {
@@ -149,6 +155,7 @@ public class ListViewModel extends AndroidViewModel {
             mAddress = result.getVicinity();
         }
         if (result.getOpeningHours() != null) {
+            // TODO MYOTOME insuffisant, il faut dire à quelle heure l'établissement ferme / ouvre
             if (result.getOpeningHours().getOpenNow()) {
                 mOpening = mApplication.getResources().getText(R.string.open);
             } else {
@@ -172,6 +179,7 @@ public class ListViewModel extends AndroidViewModel {
      * @param nearbyResult from nearby search
      * @param currentPosition from device position
      */
+    // TODO MYOTOME return une String
     private void obtainDistance(Result nearbyResult, LatLng currentPosition) {
         if (nearbyResult.getGeometry() != null && currentPosition != null) {
 
@@ -194,6 +202,7 @@ public class ListViewModel extends AndroidViewModel {
      * @param placeId from nearby search, specific
      * @param userList from fireStore
      */
+    // TODO MYOTOME return String
     private void getHowManyWorkmateInRestaurant(String placeId, @Nullable List<User> userList) {
         int howMany = 0;
         if (placeId != null && userList != null) {

@@ -23,6 +23,7 @@ import fr.myotome.go4lunch.model.detailPlacePOJO.Result;
 import fr.myotome.go4lunch.repository.FirebaseRepository;
 import fr.myotome.go4lunch.repository.MainRepository;
 
+// TODO MYOTOME non testé
 public class DetailViewModel extends AndroidViewModel {
 
     private final MainRepository mMainRepository;
@@ -66,10 +67,13 @@ public class DetailViewModel extends AndroidViewModel {
                 favoriteRestaurants));
     }
 
+    // TODO MYOTOME "init" ferait plus sens ici je pense
     public void queryToDetailPlace(String placeId) {
         mMainRepository.setDetailPlaceQuery(placeId);
     }
 
+    // TODO MYOTOME attention au naming : la vue n'ordonne pas, elle "transmet" un événement de la vue
+    //  par exemple, on pourrait l'appeler "onRestaurantPhoneNumberClicked(phoneNumber)"
     public void callRestaurant(String internationalPhoneNumber) {
 
         if (internationalPhoneNumber != null && !internationalPhoneNumber.equals("")) {
@@ -78,10 +82,12 @@ public class DetailViewModel extends AndroidViewModel {
             callIntent.setData(Uri.parse("tel:" + internationalPhoneNumber));
             mApplication.startActivity(callIntent);
         } else {
+            // TODO MYOTOME faire plutôt un ViewAction
             Toast.makeText(mApplication, getApplication().getResources().getText(R.string.no_phone), Toast.LENGTH_SHORT).show();
         }
     }
 
+    // TODO MYOTOME same same
     public void openRestaurantWebsite(String website) {
 
         if (website != null && !website.equals("")) {
@@ -93,6 +99,7 @@ public class DetailViewModel extends AndroidViewModel {
         }
     }
 
+    // TODO MYOTOME same same
     public void setRestaurantForLunch(String placeId, String restaurantName, boolean isActualRestaurant) {
         if (!isActualRestaurant) {
             mFirebaseRepository.setRestaurantForLunch(placeId, restaurantName);
@@ -109,6 +116,7 @@ public class DetailViewModel extends AndroidViewModel {
         }
     }
 
+    // TODO MYOTOME attention au naming, ce n'est pas un mediator
     public LiveData<DetailViewState> getMediatorLiveData() {
         return mMediatorLiveData;
     }
@@ -122,25 +130,33 @@ public class DetailViewModel extends AndroidViewModel {
      * @param currentUser get current user with live data
      * @param favoriteRestaurantList get list of favorite restaurant for current user with live data
      */
+    // TODO MYOTOME naming valueOfDetailPlace -> placeDetails :)
+    // TODO MYOTOME naming listOfCoworker -> coworkerList ou même coworkers :)
     private void combine(@Nullable DetailPlacePOJO valueOfDetailPlace,
                          @Nullable List<User> listOfCoworker,
-                         User currentUser,
+                         User currentUser, // TODO MYOTOME @Nullable
                          @Nullable List<FavoriteRestaurant> favoriteRestaurantList) {
         if (valueOfDetailPlace == null || currentUser == null) {
             return;
         }
         Result result = valueOfDetailPlace.getResult();
         float rating = 0;
+        // TODO MYOTOME pas d'initialisation de variable sur une même ligne
+        // TODO MYOTOME pas d'initialisation en chaine vide (sauf si vraiment pertinent)
         String urlPhoto = "", phoneNumber = "", website = "", openingHour = "";
+        // TODO MYOTOME same same
         boolean actualChoice = false, isFavorite = false;
+        // TODO MYOTOME coworkerS*
         List<User> coworkerInThisRestaurant = new ArrayList<>();
 
         if (result.getRating() != null) {
             rating = (float) ((result.getRating() * 3) / 5);
         }
         if (result.getPhotos() != null) {
+            // TODO MYOTOME attention get(0) n'est pas garanti de réussir
             urlPhoto = result.getPhotos().get(0).getPhotoReference();
         }
+        // TODO MYOTOME A quoi ça te sert ? Autorise le null plutôt que le vide :)
         if (result.getFormattedPhoneNumber() != null) {
             phoneNumber = result.getFormattedPhoneNumber();
         }
@@ -195,8 +211,10 @@ public class DetailViewModel extends AndroidViewModel {
 
     private String getOpeningHour(OpeningHours hours) {
         if (hours.getOpenNow()) {
+            // TODO MYOTOME algo pas assez complet, tu renvoie l'horaire juste pour le premier jour donné (généralement dimanche ou lundi)
             for (Period period : hours.getPeriods()) {
                 StringBuilder stringBuilder = new StringBuilder(period.getClose().getTime());
+                // TODO MYOTOME et si ça ouvre le matin ? :p
                 stringBuilder.insert(2, "h");
 
                 return mApplication.getResources().getText(R.string.open_until) + stringBuilder.toString();

@@ -1,4 +1,4 @@
-
+// TODO MYOTOME jamais de maj dans un package (certaines lib ou même Java dans certains cas n'aiment pas du tout ça et ça produit des bugs chelous
 package fr.myotome.go4lunch.model.autocompletePOJO;
 
 import java.util.List;
@@ -18,6 +18,8 @@ public class AutocompletePojo {
         return predictions;
     }
 
+    // TODO MYOTOME de façon générale, considère toujours tes POJOs comme des objets immutables, donc pas de setters et les fields en final
+    // TODO MYOTOME @Nullable sur tous les fields aussi c'est toujours intéressant
     public void setPredictions(List<Prediction> predictions) {
         this.predictions = predictions;
     }

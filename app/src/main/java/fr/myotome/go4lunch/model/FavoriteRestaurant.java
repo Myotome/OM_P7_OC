@@ -4,6 +4,7 @@ import com.google.firebase.firestore.Exclude;
 
 public class FavoriteRestaurant {
 
+    // TODO MYOTOME non utilisé
     private String mFirestoreDocumentId;
     private String mPlaceId;
     private String mRestaurantName;

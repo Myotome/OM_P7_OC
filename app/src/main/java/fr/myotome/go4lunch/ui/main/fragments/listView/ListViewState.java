@@ -6,6 +6,7 @@ public class ListViewState {
 
     private final List<ItemListViewState> mItemListViewState;
 
+    // TODO MYOTOME wrapper inutile, tu peux supprimer cette classe
     public ListViewState(List<ItemListViewState> itemListViewStates){
         mItemListViewState = itemListViewStates;
     }

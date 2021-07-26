@@ -19,6 +19,7 @@ public class DetailViewState {
     private final List<User> mCurrentCoworker;
     private final boolean mIsFavorite;
 
+    // TODO MYOTOME attention au naming des variables, presque rien ne correspond entre les variables de ton ViewModel (dans le combine) et ici
     public DetailViewState(String restaurantName,
                            String restaurantAddress,
                            float restaurantRating,
@@ -75,6 +76,7 @@ public class DetailViewState {
         return mOpeningHour;
     }
 
+    // TODO MYOTOME c'est du MVC ça, à retirer (et à calculer dans le VM)
     public int getFabCurrentRestaurant() {
         if(mFabCurrentRestaurant){
             return R.drawable.ic_baseline_check_circle_green_30;
@@ -90,6 +92,8 @@ public class DetailViewState {
         return mFabCurrentRestaurant;
     }
 
+    // TODO MYOTOME suffixer de "drawableRes" et utiliser @DrawableRes pour une meilleure compréhension de ce int
+    // TODO MYOTOME same same MVC
     public int getFavoriteRestaurant(){
         if (mIsFavorite){
             return R.drawable.ic_baseline_star_24;
