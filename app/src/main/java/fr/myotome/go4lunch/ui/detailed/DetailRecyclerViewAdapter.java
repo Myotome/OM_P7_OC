@@ -20,6 +20,7 @@ import fr.myotome.go4lunch.model.User;
 
 public class DetailRecyclerViewAdapter extends RecyclerView.Adapter<DetailRecyclerViewAdapter.RecyclerViewHolder> {
 
+    // TODO MYOTOME Erreur, chaque ViewHolder doit avoir son binding, pas l'adapter
     private FrameWorkmatesBinding mBinding;
     private List<User> mData = new ArrayList<>();
 
@@ -49,6 +50,7 @@ public class DetailRecyclerViewAdapter extends RecyclerView.Adapter<DetailRecycl
         return mData.size();
     }
 
+    // TODO MYOTOME public **static** class (très important : ça évite que le ViewHolder ait une référence vers son adapter)
     public class RecyclerViewHolder extends RecyclerView.ViewHolder{
 
         private final ImageView mAvatar = mBinding.ivFrameWorkmateAvatar;

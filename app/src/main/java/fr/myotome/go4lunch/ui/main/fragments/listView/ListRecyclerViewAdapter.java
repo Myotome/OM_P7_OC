@@ -26,7 +26,10 @@ import fr.myotome.go4lunch.ui.detailed.DetailRestaurantActivity;
 
 public class ListRecyclerViewAdapter extends RecyclerView.Adapter<ListRecyclerViewAdapter.RecyclerViewHolder> implements Filterable {
 
+    // TODO MYOTOME erreur : un binding par ViewHolder (essaye de scroller un peu, tu verras le problème :p)
     private FrameListviewBinding mBinding;
+
+    // TODO MYOTOME C'est pour ça qu'on aime pas le MVC : pas d'état unique, on "danse" entre 2 états
     private List<ItemListViewState> mData;
     private List<ItemListViewState> mFullData;
 
@@ -49,6 +52,7 @@ public class ListRecyclerViewAdapter extends RecyclerView.Adapter<ListRecyclerVi
         holder.mWorkmate.setText(currentData.getHowManyWorkmate());
         holder.mRatingBar.setRating(currentData.getRestaurantRating());
 
+        // TODO MYOTOME same same concaténation
         Glide.with(holder.mTitle.getContext())
                 .load("https://maps.googleapis.com/maps/api/place/photo?maxwidth=50&photoreference="
                             + currentData.getRestaurantPictureUrl()
@@ -57,6 +61,7 @@ public class ListRecyclerViewAdapter extends RecyclerView.Adapter<ListRecyclerVi
                     .into(holder.mPhoto);
 
         holder.mConstraintLayout.setOnClickListener(v -> {
+            // TODO MYOTOME same same newInstance / navigate pour cacher la constante
             Intent intent = new Intent(holder.mTitle.getContext(), DetailRestaurantActivity.class);
             intent.putExtra("restaurant", currentData.getPlaceId());
             holder.mTitle.getContext().startActivity(intent);
@@ -73,6 +78,7 @@ public class ListRecyclerViewAdapter extends RecyclerView.Adapter<ListRecyclerVi
         return resultFilteredList;
     }
 
+    // TODO MYOTOME Filter c'est un composant MVC, en MVVM le filtrage doit se faire côté VM
     private final Filter resultFilteredList = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
@@ -103,8 +109,10 @@ public class ListRecyclerViewAdapter extends RecyclerView.Adapter<ListRecyclerVi
     };
 
 
+    // TODO MYOTOME public **static** class
     public class RecyclerViewHolder extends RecyclerView.ViewHolder {
 
+        // TODO MYOTOME garde ton binding en field, pas besoin de plus
         private final TextView mTitle = mBinding.tvListviewTitle;
         private final TextView mAddress = mBinding.tvListviewAddress;
         private final TextView mOpening = mBinding.tvListviewOpening;
@@ -116,10 +124,12 @@ public class ListRecyclerViewAdapter extends RecyclerView.Adapter<ListRecyclerVi
 
         public RecyclerViewHolder(@NonNull FrameListviewBinding binding) {
             super(binding.getRoot());
+            // TODO MYOTOME erreur commune parce que la classe n'est pas static
             mBinding = binding;
         }
     }
 
+    // TODO MYOTOME je te conseille d'utiliser un ListAdapter<ItemListViewState,RecyclerViewHolder> plutôt, tu verras le gain de perf :)
     public void setData(List<ItemListViewState> data) {
         mData = data;
         mFullData = new ArrayList<>(data);

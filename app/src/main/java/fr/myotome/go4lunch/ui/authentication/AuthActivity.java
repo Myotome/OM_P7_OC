@@ -120,6 +120,8 @@ public class AuthActivity extends AppCompatActivity {
     private void initAuthViewModel() {
         mAuthViewModel = new ViewModelProvider(this, ViewModelFactory.getInstance()).get(AuthViewModel.class);
         mAuthViewModel.getSignInMutableLiveData().observe(this, user -> {
+            // TODO MYOTOME C'est le VM qui doit avoir cette règle de gestion
+            //  Le VM doit "dire quoi faire" (c'est à dire "navigue vers une autre page" en l'occurence), la vue ne "choisit pas"
             if (!user.getUid().equals("")) {
                 startToNextActivity();
             }
@@ -232,6 +234,7 @@ public class AuthActivity extends AppCompatActivity {
             String email = mciBinding.etConnectionMailEmail.getText().toString().trim();
             String password = mciBinding.etConnectionMailPassword.getText().toString().trim();
 
+            // TODO MYOTOME A bouger côté VM
             if (email.isEmpty()) {
                 mciBinding.etConnectionMailEmail.setError(getText(R.string.request_mail));
                 mciBinding.etConnectionMailEmail.requestFocus();
@@ -259,6 +262,7 @@ public class AuthActivity extends AppCompatActivity {
         mciBinding.btConnectionMailForgot.setOnClickListener(v -> {
             String email = mciBinding.etConnectionMailEmail.getText().toString().trim();
 
+            // TODO MYOTOME A bouger côté VM
             if (email.isEmpty()) {
                 mciBinding.etConnectionMailEmail.setError(getText(R.string.request_mail));
                 mciBinding.etConnectionMailEmail.requestFocus();
@@ -294,6 +298,7 @@ public class AuthActivity extends AppCompatActivity {
             String email = mriBinding.etRegistrationMailEmail.getText().toString().trim();
             String password = mriBinding.etRegistrationMailPassword.getText().toString().trim();
 
+            // TODO MYOTOME A bouger côté VM
             if (firstName.isEmpty()) {
                 mriBinding.etRegistrationMailFirstname.setError(getText(R.string.request_name));
                 mriBinding.etRegistrationMailFirstname.requestFocus();

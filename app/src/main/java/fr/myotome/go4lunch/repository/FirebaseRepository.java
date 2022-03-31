@@ -24,12 +24,15 @@ import java.util.Objects;
 import fr.myotome.go4lunch.model.FavoriteRestaurant;
 import fr.myotome.go4lunch.model.User;
 
+// TODO MYOTOME non testé
 public class FirebaseRepository {
     private final Application mApplication;
     private static final String COLLECTION = "Workmates";
     private final FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private final FirebaseFirestore rootRef = FirebaseFirestore.getInstance();
     private final CollectionReference mUsersRef = rootRef.collection(COLLECTION);
+    // TODO MYOTOME Je pense qu'il est plus intéressant de faire une "vraie" source de vérité en branchant cette LiveData sur le contenu
+    //  de Firestore en snapshot
     private final MutableLiveData<User> mUserMutableLiveData = new MutableLiveData<>();
 
     public FirebaseRepository(Application application) {
@@ -46,6 +49,7 @@ public class FirebaseRepository {
             if (task.isSuccessful()){
                 singInBody(task);
             }else {
+                // TODO MYOTOME pas de toast dans le repo (ni en anglais ! :p)
                 Toast.makeText(mApplication, "Something wrong", Toast.LENGTH_SHORT).show();
             }
         });
@@ -56,6 +60,7 @@ public class FirebaseRepository {
         mFirebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
+                        // TODO MYOTOME Objects.requireNonNull ne sert à rien comme méthode, à oublier et à supprimer de partout
                         String uId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
                         User user = new User(uId, name, email, "https://gravatar.com/avatar/f91aabd46a5c3abef7fe229434346b38?s=400&d=identicon&r=x");
                         createUserInFirestore(user);
@@ -90,6 +95,7 @@ public class FirebaseRepository {
         }
     }
 
+    // TODO MYOTOME non nécessaire
     public void setNullUser(){
         mUserMutableLiveData.setValue(new User("","","",""));
     }
@@ -102,6 +108,7 @@ public class FirebaseRepository {
     public void createUserInFirestore(User user) {
 
         DocumentReference uidRef = mUsersRef.document(user.getUid());
+        // TODO MYOTOME tu peux faire un set, plus simple
         uidRef.get().addOnCompleteListener(uidTask -> {
             if (uidTask.isSuccessful()) {
                 DocumentSnapshot document = uidTask.getResult();
@@ -118,11 +125,14 @@ public class FirebaseRepository {
         MutableLiveData<List<User>> fireStoreAllUsers = new MutableLiveData<>();
         mUsersRef.addSnapshotListener(((value, error) -> {
             if (error != null) {
+                // TODO MYOTOME pas de toast dans le repo
                 Toast.makeText(mApplication, error.getMessage(), Toast.LENGTH_SHORT).show();
             } else {
                 List<User> users = new ArrayList<>();
+                // TODO MYOTOME if ? assert ça sert à rien
                 assert value != null;
                 for (QueryDocumentSnapshot documentSnapshot : value) {
+                    // TODO MYOTOME protège ton .toObject qui peut faire crasher
                     users.add(documentSnapshot.toObject(User.class));
                 }
                 fireStoreAllUsers.setValue(users);
@@ -147,12 +157,14 @@ public class FirebaseRepository {
                 }
             });
         }else {
+            // TODO MYOTOME ne jamais mettre de valeur "par défaut" dans un objet : soit c'est null, soit c'est bien rempli
             currentUser.setValue(new User("","","",""));
         }
         return currentUser;
     }
 
     public void setRestaurantForLunch(String placeId, String name) {
+        // TODO MYOTOME à extraire dans des constantes
         mUsersRef.document(Objects.requireNonNull(mFirebaseAuth.getUid())).update("restaurantPlaceId", placeId);
         mUsersRef.document(mFirebaseAuth.getUid()).update("restaurantName", name);
     }

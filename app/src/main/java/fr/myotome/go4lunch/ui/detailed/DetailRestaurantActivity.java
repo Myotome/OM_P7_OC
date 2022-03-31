@@ -15,6 +15,7 @@ import fr.myotome.go4lunch.ui.utils.ViewModelFactory;
 
 public class DetailRestaurantActivity extends AppCompatActivity {
 
+    // TODO MYOTOME variable locale possible
     private ActivityDetailRestaurantBinding mBinding;
 
     @Override
@@ -28,6 +29,7 @@ public class DetailRestaurantActivity extends AppCompatActivity {
         mBinding.rvDetailWorkmate.setLayoutManager(new LinearLayoutManager(mBinding.getRoot().getContext()));
         mBinding.rvDetailWorkmate.setAdapter(recyclerView);
 
+        // TODO MYOTOME A extraire dans une constante, ou mieux, utiliser une petite méthode newInstance ou navigate
         String placeId = getIntent().getStringExtra("restaurant");
         DetailViewModel viewModel = new ViewModelProvider(this, ViewModelFactory.getInstance()).get(DetailViewModel.class);
         viewModel.queryToDetailPlace(placeId);
@@ -40,6 +42,7 @@ public class DetailRestaurantActivity extends AppCompatActivity {
             mBinding.tvDetailHour.setText(detailViewState.getOpeningHour());
             mBinding.btDetailLike.setCompoundDrawablesWithIntrinsicBounds(0, detailViewState.getFavoriteRestaurant(), 0, 0);
 
+            // TODO MYOTOME URL à concaténer côté VM
             Glide.with(this)
                     .load("https://maps.googleapis.com/maps/api/place/photo?maxwidth=300&photoreference="
                             + detailViewState.getUrlRestaurantPhoto()

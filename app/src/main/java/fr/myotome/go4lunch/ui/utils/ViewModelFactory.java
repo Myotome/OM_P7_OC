@@ -22,6 +22,7 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
     private final FirebaseRepository mFirebaseRepository;
     private final MainRepository mMainRepository;
 
+    // TODO MYOTOME private
     public ViewModelFactory(FirebaseRepository firebaseRepository, MainRepository mainRepository) {
         mFirebaseRepository = firebaseRepository;
         mMainRepository = mainRepository;
